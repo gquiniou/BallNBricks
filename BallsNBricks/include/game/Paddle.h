@@ -20,14 +20,10 @@ public:
 
 	virtual ~Paddle();
 
-	void update(int);
-
-	sf::Sprite &getDrawable();
+	void update(gamestate &);
 
 private:
 	void init();
-	sf::Sprite pad;
-	sf::Texture tex;
 };
 
 } /* namespace game */

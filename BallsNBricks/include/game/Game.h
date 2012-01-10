@@ -9,8 +9,11 @@
 #define GAME_H_
 
 #include "paddle.h"
+#include "ball.h"
+#include "gamestate.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <list>
 
 
 namespace game {
@@ -29,6 +32,8 @@ private:
 
 	sf::RenderWindow &App;
 	std::unique_ptr<Paddle> pad;
+	std::list<std::unique_ptr<Ball>> balls;
+	gamestate state;
 };
 
 } /* namespace game */

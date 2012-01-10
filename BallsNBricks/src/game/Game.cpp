@@ -7,6 +7,7 @@
 
 #include "game/Game.h"
 #include <iostream>
+#include <typeinfo>
 
 namespace game {
 
@@ -29,6 +30,8 @@ void Game::init() {
 
 	pad.reset(new Paddle(info));
 
+	std::unique_ptr<Ball> ball1(new Ball(info));
+	balls.push_back(std::move(ball1));
 }
 
 void Game::cleanup() {
@@ -51,11 +54,20 @@ void Game::mainloop() {
 			}
 		}
 
-		paddle->update(sf::Mouse::GetPosition(App).x);
+		state.mousex = sf::Mouse::GetPosition(App).x;
+		paddle->update(state);
+
+		for(auto it = balls.begin(); it != balls.end(); it++ )
+			(**it).update(state);
+		//	std::cout << typeid(**it).name() << std::endl;
+
+
 
 		App.Clear();
 
 		App.Draw(paddle->getDrawable());
+		for (auto it = begin(balls); it != end(balls); it++)
+			App.Draw((**it).getDrawable());
 		App.Display();
 	}
 }

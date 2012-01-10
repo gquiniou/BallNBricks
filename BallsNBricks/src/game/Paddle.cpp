@@ -12,26 +12,24 @@ namespace game {
 
 void Paddle::init() {
 	std::cout << "init";
-	if (! tex.LoadFromFile("paddles.png"))
+	if (! texture.LoadFromFile("paddles.png"))
 		std::cout << "menfin";
-	pad.SetTexture(tex);
-	pad.SetTextureRect(sf::IntRect(0, 0, 64, 16));
+	sprite.SetTexture(texture);
+	sprite.SetTextureRect(sf::IntRect(0, 0, 64, 16));
 }
 
 Paddle::~Paddle() {
 	// TODO Auto-generated destructor stub
 }
 
-void Paddle::update(int mousepos) {
-	if (mousepos < 0)
-		mousepos = 0;
-	if (mousepos + pad.GetGlobalBounds().Width > infos.width)
-		mousepos = infos.width - pad.GetGlobalBounds().Width;
-	pad.SetPosition(mousepos, infos.height - pad.GetGlobalBounds().Height);
-}
-
-sf::Sprite &Paddle::getDrawable() {
-	return pad;
+void Paddle::update(gamestate &gs) {
+	int x = gs.mousex;
+	int y = infos.height - sprite.GetGlobalBounds().Height;
+	if (x < 0)
+		x = 0;
+	if (x + sprite.GetGlobalBounds().Width > infos.width)
+		x = infos.width - sprite.GetGlobalBounds().Width;
+	sprite.SetPosition(x, y);
 }
 
 } /* namespace game */

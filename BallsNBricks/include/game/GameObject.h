@@ -8,6 +8,7 @@
 #ifndef GAMEOBJECT_H_
 #define GAMEOBJECT_H_
 
+#include "game/gamestate.h"
 #include "game/gameinfo.h"
 #include <SFML/Graphics.hpp>
 
@@ -19,12 +20,19 @@ public:
 
 	virtual ~GameObject();
 
-	//virtual void update() = 0;
+	virtual void update(gamestate &) = 0;
 
-	virtual sf::Sprite &getDrawable() = 0;
+	sf::Sprite &getDrawable()  {
+		return sprite;
+	}
+	sf::FloatRect getRect() const {
+		return sprite.GetGlobalBounds();
+	}
 
 protected:
 	gameinfo infos;
+	sf::Sprite sprite;
+	sf::Texture texture;
 };
 
 } /* namespace game */
