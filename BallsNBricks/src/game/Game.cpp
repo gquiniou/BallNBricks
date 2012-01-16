@@ -34,6 +34,9 @@ void Game::init() {
 	std::unique_ptr<Ball> ball1(new Ball(info));
 	balls.push_back(std::move(ball1));
 
+
+	state.ballfired = false;
+
 	//left wall
 	state.walls[0].x1 = state.walls[0].x2 = 0;
 	state.walls[0].y1 = 0;
@@ -55,6 +58,8 @@ void Game::cleanup() {
 
 void Game::mainloop() {
 
+
+
 	Paddle *paddle = pad.get();
 
 	while (App.IsOpened()) {
@@ -64,8 +69,15 @@ void Game::mainloop() {
 			if ((Event.Type == sf::Event::Closed) || ((Event.Type == sf::Event::KeyPressed) && (Event.Key.Code == sf::Keyboard::Escape))) {
 				return;
 			}
-			if (Event.Type == sf::Event::MouseButtonReleased) {
+			if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Button::Left) {
 				state.ballfired = true;
+			}
+			if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Button::Right) {
+				gameinfo info;
+				info.height = App.GetHeight();
+				info.width = App.GetWidth();
+				std::unique_ptr<Ball> tmp(new Ball(info));
+				balls.push_back(std::move(tmp));
 			}
 		}
 

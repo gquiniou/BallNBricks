@@ -36,14 +36,21 @@ void Ball::init() {
 
 void Ball::update(gamestate &gs) {
 	sf::Vector2f newpos(0,0);
-	if (! fired && ! gs.ballfired) {
+
+	if (gs.ballfired && ! fired) {
+		fired = true;
+		gs.ballfired = false;
+	}
+
+	if (! fired  ) {
 		//La balle suit le pad
 		newpos.x = gs.paddleRect.Left + gs.paddleRect.Width/2;
 		newpos.y = gs.paddleRect.Top - sprite.GetGlobalBounds().Height;
 	} else {
-		update(gs.frametime, newpos, sprite.GetPosition(), gs);
+		update(gs.frametime , newpos, sprite.GetPosition(), gs);
 	}
 	sprite.SetPosition(newpos.x, newpos.y);
+
 }
 
 
@@ -84,6 +91,11 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 		//std::cout << "collisions " << collisionpoint << velocity << std::endl;
  		newpos = collisionpoint;
 		sf::Uint32 remaining = time / (vlength(movement) / closest);
+
+		if (newpos.x < 0 || newpos.y < 0) {
+			std::cout << newpos << std::endl;
+		}
+
 		update(remaining, newpos, newpos, gs);
 	}
 }
