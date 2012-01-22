@@ -34,22 +34,28 @@ void Game::init() {
 	std::unique_ptr<Ball> ball1(new Ball(info));
 	balls.push_back(std::move(ball1));
 
-
 	state.ballfired = false;
 
-	//left wall
-	state.walls[0].x1 = state.walls[0].x2 = 0;
-	state.walls[0].y1 = 0;
-	state.walls[0].y2 = App.GetHeight();
-	//top wall
+	//Bottom wall
 	state.walls[1].x1 = 0;
-	state.walls[1].y1 = state.walls[1].y2 = 0;
+	state.walls[1].y1 = state.walls[1].y2 = App.GetHeight();
 	state.walls[1].x2 = App.GetWidth();
 	//Right wall
 	state.walls[2].x1 = state.walls[2].x2 = App.GetWidth();
 	state.walls[2].y1 = 0;
 	state.walls[2].y2 = App.GetHeight();
+	//left wall
+	state.walls[3].x1 = state.walls[3].x2 = 0;
+	state.walls[3].y1 = 0;
+	state.walls[3].y2 = App.GetHeight();
+	//top wall
+	state.walls[4].x1 = 0;
+	state.walls[4].y1 = state.walls[4].y2 = 0;
+	state.walls[4].x2 = App.GetWidth();
 
+	brickstexture.LoadFromFile("briques.png");
+	LevelLoader ll("level1.txt", info, &brickstexture);
+	bricks = ll.loadLevel();
 }
 
 void Game::cleanup() {
@@ -57,7 +63,6 @@ void Game::cleanup() {
 }
 
 void Game::mainloop() {
-
 
 
 	Paddle *paddle = pad.get();
@@ -88,9 +93,9 @@ void Game::mainloop() {
 
 		state.paddleRect = paddle->getRect();
 		//The paddle is a moving wall
-		state.walls[3].x1 = state.paddleRect.Left;
-		state.walls[3].y1 = state.walls[3].y2 = state.paddleRect.Top;
-		state.walls[3].x2 = state.paddleRect.Left + state.paddleRect.Width;
+		state.walls[0].x1 = state.paddleRect.Left;
+		state.walls[0].y1 = state.walls[0].y2 = state.paddleRect.Top;
+		state.walls[0].x2 = state.paddleRect.Left + state.paddleRect.Width;
 
 		for(auto it = balls.begin(); it != balls.end(); it++ )
 			(**it).update(state);
@@ -102,6 +107,8 @@ void Game::mainloop() {
 
 		App.Draw(paddle->getDrawable());
 		for (auto it = begin(balls); it != end(balls); it++)
+			App.Draw((**it).getDrawable());
+		for (auto it = begin(bricks); it != end(bricks); it++)
 			App.Draw((**it).getDrawable());
 		App.Display();
 	}

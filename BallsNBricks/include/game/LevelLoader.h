@@ -8,22 +8,27 @@
 #ifndef LEVEL_H_
 #define LEVEL_H_
 
+#include "game/Brick.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <memory>
+#include <list>
 
 
 namespace game {
 
-class Level {
+class LevelLoader {
 public:
-	Level(std::string path);
-	virtual ~Level();
+	LevelLoader(std::string path, gameinfo i, sf::Texture *brickstexture);
+	std::list<std::unique_ptr<Brick>> loadLevel();
+	virtual ~LevelLoader();
 private:
 	std::ifstream levelfile;
 	std::string filepath;
-	sf::Texture texture;
+	gameinfo infos;
+	sf::Texture *texture;
 };
 
 } /* namespace game */

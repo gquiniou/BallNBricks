@@ -25,7 +25,7 @@ typedef struct sgamestate {
 	bool ballfired;
 	sf::FloatRect paddleRect;
 	sf::Uint32 frametime;
-	line walls[4];
+	line walls[5];
 } gamestate;
 
 

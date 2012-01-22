@@ -6,13 +6,13 @@
  */
 
 #include "game/Ball.h"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <cassert>
 
 namespace game {
 
-sf::Vector2f intersection(line, line);
+sf::Vector2i intersection(line, line);
 float vlength(sf::Vector2f);
 
 template <typename T>
@@ -27,7 +27,8 @@ Ball::~Ball() {
 }
 
 void Ball::init() {
-	std::cout << "init";
+	static int nballs = 0;
+	std::cout << nballs++ <<std::endl;
 	if (! texture.LoadFromFile("balls.png"))
 		std::cout << "menfin";
 	sprite.SetTexture(texture);
@@ -65,14 +66,11 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 	newpos.x = origpos.x + movement.x;
 	newpos.y = origpos.y + movement.y;
 
-	origpos.x += 0.1 * (velocity.x >= 0 ? 1 : -1);
-	origpos.y += 0.1 * (velocity.y >= 0 ? 1 : -1);
-
 	line balltrack = {origpos.x , origpos.y, newpos.x, newpos.y};
 
 	//Checking collisions against Walls and Paddle
-	for (int i = 0; i < 4 ; i++) {
-		sf::Vector2f point = intersection(balltrack, gs.walls[i]);
+	for (int i = 0; i < 5 ; i++) {
+		sf::Vector2f point(intersection(balltrack, gs.walls[i]));
 		if (point != empty) {
 			float length = vlength( point - origpos);
 			if (length < closest) {
@@ -88,13 +86,16 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 		} else {
 			velocity.x = - velocity.x;
 		}
-		//std::cout << "collisions " << collisionpoint << velocity << std::endl;
- 		newpos = collisionpoint;
 		sf::Uint32 remaining = time / (vlength(movement) / closest);
+		newpos = collisionpoint;
 
-		if (newpos.x < 0 || newpos.y < 0) {
-			std::cout << newpos << std::endl;
-		}
+		assert(newpos.x >= 0 && newpos.y >= 0);
+
+		if (newpos.x < 0 || newpos.y > 800 || newpos.y < 0 || newpos.y > 600)
+			std::cout << "problem";
+
+		newpos.x += 0.1 * (velocity.x >= 0 ? 1 : -1);
+		newpos.y += 0.1 * (velocity.y >= 0 ? 1 : -1);
 
 		update(remaining, newpos, newpos, gs);
 	}
@@ -104,8 +105,8 @@ inline float vlength(const sf::Vector2f v) {
 	return sqrt(v.x * v.x + v.y * v.y);
 }
 
-sf::Vector2f intersection(const line l1, const line l2) {
-	sf::Vector2f result(0, 0);
+sf::Vector2i intersection(const line l1, const line l2) {
+	sf::Vector2i result(0, 0);
 
 	int denom = ((l2.y2-l2.y1) * (l1.x2-l1.x1)) - ((l2.x2-l2.x1) * (l1.y2-l1.y1));
 	if (denom != 0) {

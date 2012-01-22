@@ -19,6 +19,7 @@ public:
 	Brick(gameinfo i, sf::Sprite _sprite) : GameObject(i) {
 		this->sprite = _sprite;
 	};
+	void update(gamestate &) { };
 	virtual ~Brick();
 };
 

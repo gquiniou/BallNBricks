@@ -15,7 +15,7 @@ namespace game {
 class Ball: public game::GameObject {
 public:
 
-	Ball(gameinfo i) : GameObject(i), fired(false), velocity(-200, -200) {
+	Ball(gameinfo i) : GameObject(i), fired(false), lost(false), velocity(-200, -200) {
 		init();
 	}
 	virtual ~Ball();
@@ -27,6 +27,7 @@ private:
 	void update(sf::Uint32 time, sf::Vector2f &, sf::Vector2f, gamestate &);
 
 	bool fired;
+	bool lost;
 	sf::Vector2f velocity;
 };
 
