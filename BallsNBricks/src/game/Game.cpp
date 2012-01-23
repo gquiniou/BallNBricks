@@ -6,6 +6,8 @@
  */
 
 #include "game/Game.h"
+#include "game/ResourceManager.h"
+#include "game/LevelLoader.h"
 #include <iostream>
 #include <typeinfo>
 

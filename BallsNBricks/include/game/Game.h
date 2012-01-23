@@ -11,9 +11,7 @@
 #include "paddle.h"
 #include "ball.h"
 #include "brick.h"
-#include "LevelLoader.h"
 #include "gamestate.h"
-#include "ResourceManager.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <list>
