@@ -24,11 +24,11 @@ Paddle::~Paddle() {
 
 void Paddle::update(gamestate &gs) {
 	int x = gs.mousex;
-	int y = infos.height - sprite.GetGlobalBounds().Height;
+	int y = 600 - sprite.GetGlobalBounds().Height;
 	if (x < 0)
 		x = 0;
-	if (x + sprite.GetGlobalBounds().Width > infos.width)
-		x = infos.width - sprite.GetGlobalBounds().Width;
+	if (x + sprite.GetGlobalBounds().Width > 800)
+		x = 800 - sprite.GetGlobalBounds().Width;
 	sprite.SetPosition(x, y);
 }
 

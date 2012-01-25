@@ -9,20 +9,21 @@
 #define GAMEOBJECT_H_
 
 #include "game/gamestate.h"
-#include "game/gameinfo.h"
 #include <SFML/Graphics.hpp>
 
 namespace game {
 
 class GameObject {
 public:
-	GameObject(gameinfo i) : infos(i) {};
+	GameObject() {}
+	//GameObject(gameinfo i) : infos(i) {};
+	GameObject(sf::Sprite _sprite) : sprite(_sprite) {};
 
 	virtual ~GameObject();
 
 	virtual void update(gamestate &) = 0;
 
-	sf::Sprite &getDrawable()  {
+	sf::Sprite &getDrawable() {
 		return sprite;
 	}
 	sf::FloatRect getRect() const {
@@ -30,7 +31,7 @@ public:
 	}
 
 protected:
-	gameinfo infos;
+	//gameinfo infos;
 	sf::Sprite sprite;
 	sf::Texture texture;
 };

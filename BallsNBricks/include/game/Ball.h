@@ -8,14 +8,15 @@
 #ifndef BALL_H_
 #define BALL_H_
 
-#include "game/GameObject.h"
+#include "game/MovingObject.h"
 
 namespace game {
 
-class Ball: public game::GameObject {
+class Ball: public game::MovingObject {
 public:
 
-	Ball(gameinfo i) : GameObject(i), fired(false), lost(false), velocity(-200, -200) {
+	Ball() : MovingObject(sf::Vector2f(-200, -200)), fired(false), lost(false) {
+		velocity = sf::Vector2f(-200.0, -200.0);
 		init();
 	}
 	virtual ~Ball();
@@ -28,7 +29,6 @@ private:
 
 	bool fired;
 	bool lost;
-	sf::Vector2f velocity;
 };
 
 } /* namespace game */

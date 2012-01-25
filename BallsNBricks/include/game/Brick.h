@@ -10,14 +10,12 @@
 
 #include "game/GameObject.h"
 
-
 namespace game {
 
-class Brick: public game::GameObject {
+class Brick: public GameObject  {
 public:
-	Brick(gameinfo i) : GameObject(i) {}
-	Brick(gameinfo i, sf::Sprite _sprite) : GameObject(i) {
-		this->sprite = _sprite;
+//	Brick(gameinfo i) {}
+	Brick(sf::Sprite _sprite) : GameObject(_sprite) {
 	};
 	void update(gamestate &) { };
 	virtual ~Brick();

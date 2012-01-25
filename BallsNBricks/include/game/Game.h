@@ -24,7 +24,7 @@ class Game {
 public:
 	Game(sf::RenderWindow &_app) : App(_app)
 	{ }
-
+	//sf::Vector2f GetClosestCollision(const GameObject *,const line, bool &);
 	void start();
 
 private:
