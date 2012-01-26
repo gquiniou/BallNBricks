@@ -6,6 +6,7 @@
  */
 
 #include "game/Game.h"
+#include "game/Critter.h"
 #include <iostream>
 #include <typeinfo>
 
@@ -52,6 +53,8 @@ void Game::init() {
 	brickstexture.LoadFromFile("briques.png");
 	LevelLoader ll("level1.txt", &brickstexture);
 	bricks = ll.loadLevel();
+
+
 }
 
 void Game::cleanup() {
@@ -60,6 +63,8 @@ void Game::cleanup() {
 
 void Game::mainloop() {
 
+	Critter c(bricks.front().get()->getDrawable() );
+	c.getDrawable().SetPosition(100,500);
 
 	Paddle *paddle = pad.get();
 
@@ -103,6 +108,7 @@ void Game::mainloop() {
 			App.Draw((**it).getDrawable());
 		for (auto it = begin(bricks); it != end(bricks); it++)
 			App.Draw((**it).getDrawable());
+		App.Draw(c.getDrawable());
 		App.Display();
 	}
 }

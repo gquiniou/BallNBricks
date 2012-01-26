@@ -16,6 +16,8 @@ class MovingObject: public virtual GameObject {
 
 public:
 
+	MovingObject() {}
+
 	MovingObject(sf::Vector2f vel) : velocity(vel) {}
 
 	virtual ~MovingObject() {}

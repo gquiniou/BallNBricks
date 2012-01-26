@@ -9,4 +9,9 @@
 
 namespace game {
 
+void Critter::update(gamestate &) {
+
+}
+
+
 } /* namespace game */

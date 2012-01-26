@@ -13,6 +13,15 @@
 namespace game {
 
 class Critter : public Collidable, public MovingObject {
+
+public:
+
+	Critter(sf::Sprite _sprite) : GameObject(_sprite) {}
+
+	virtual ~Critter() {}
+
+	void update(gamestate &);
+
 };
 
 } /* namespace game */

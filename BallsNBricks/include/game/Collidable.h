@@ -19,7 +19,10 @@ public:
 
 	Collidable(sf::Sprite _sprite) : GameObject(_sprite) {}
 
-	int getCollisionRadius();
+	int getCollisionRadius() {
+		//sf::FloatRect fr = sprite.GetGlobalBounds();
+		return 0;
+	}
 
 	bool mustCheckCollisions() const {
 		return checkcollisions;

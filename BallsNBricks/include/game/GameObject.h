@@ -19,9 +19,9 @@ public:
 
 	GameObject() {}
 
-	GameObject(sf::Sprite _sprite) : sprite(_sprite) {};
+	GameObject(sf::Sprite _sprite) : sprite(_sprite) {}
 
-	virtual ~GameObject();
+	virtual ~GameObject() {}
 
 	virtual void update(gamestate &) = 0;
 
