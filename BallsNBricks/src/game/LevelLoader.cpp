@@ -10,7 +10,7 @@
 
 namespace game {
 
-LevelLoader::LevelLoader(std::string path, gameinfo i, sf::Texture *brickstexture)  : filepath(path), infos(i), texture(brickstexture) {
+LevelLoader::LevelLoader(std::string path, sf::Texture *brickstexture)  : filepath(path), texture(brickstexture) {
 	// TODO Auto-generated constructor stub
 	filepath = path;
 
@@ -49,7 +49,7 @@ std::list<std::unique_ptr<Brick>> LevelLoader::loadLevel() {
 				continue;
 				}
 				sprite.SetPosition(x, y);
-				std::unique_ptr<Brick> temp(new Brick(infos, sprite));
+				std::unique_ptr<Brick> temp(new Brick(sprite));
 				bricks.push_back(std::move(temp));
 			}
 			prev = *c;

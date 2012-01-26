@@ -14,7 +14,7 @@ namespace game {
 
 class Paddle: public GameObject {
 public:
-	Paddle(gameinfo i) : GameObject(i) {
+	Paddle() {
 		init();
 	};
 

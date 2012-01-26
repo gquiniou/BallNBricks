@@ -26,14 +26,10 @@ void Game::init() {
 	App.ShowMouseCursor(false);
 	App.EnableVerticalSync(true);
 
-	gameinfo info;
-	info.height = App.GetHeight();
-	info.width = App.GetWidth();
-
-	pad.reset(new Paddle(info));
+	pad.reset(new Paddle());
 
 	//Let's start with one ball
-	std::unique_ptr<Ball> ball1(new Ball(info));
+	std::unique_ptr<Ball> ball1(new Ball());
 	balls.push_back(std::move(ball1));
 
 	state.ballfired = false;
@@ -55,7 +51,8 @@ void Game::init() {
 	state.walls[4].y1 = state.walls[4].y2 = 0;
 	state.walls[4].x2 = App.GetWidth();
 
-	LevelLoader ll("level1.txt", info, ResourceManager::getTexture("briques.png"));
+	//brickstexture.LoadFromFile("briques.png");
+	LevelLoader ll("level1.txt", ResourceManager::getTexture("briques.png"));
 	bricks = ll.loadLevel();
 }
 
@@ -79,10 +76,7 @@ void Game::mainloop() {
 				state.ballfired = true;
 			}
 			if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Button::Right) {
-				gameinfo info;
-				info.height = App.GetHeight();
-				info.width = App.GetWidth();
-				std::unique_ptr<Ball> tmp(new Ball(info));
+				std::unique_ptr<Ball> tmp(new Ball());
 				balls.push_back(std::move(tmp));
 			}
 		}
@@ -92,7 +86,7 @@ void Game::mainloop() {
 
 		paddle->update(state);
 
-		state.paddleRect = paddle->getRect();
+		state.paddleRect = paddle->getDrawable().GetGlobalBounds();
 		//The paddle is a moving wall
 		state.walls[0].x1 = state.paddleRect.Left;
 		state.walls[0].y1 = state.walls[0].y2 = state.paddleRect.Top;
@@ -114,5 +108,10 @@ void Game::mainloop() {
 		App.Display();
 	}
 }
+
+//sf::Vector2f Game::GetClosestCollision(const GameObject *source, const line track, bool &horizbounce) {
+//	//for (auto it = begin(bricks); it != end(bricks); it++)
+//}
+
 
 } /* namespace game */

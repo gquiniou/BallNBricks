@@ -90,9 +90,6 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 
 		assert(newpos.x >= 0 && newpos.y >= 0);
 
-		if (newpos.x < 0 || newpos.y > 800 || newpos.y < 0 || newpos.y > 600)
-			std::cout << "problem";
-
 		newpos.x += 0.1 * (velocity.x >= 0 ? 1 : -1);
 		newpos.y += 0.1 * (velocity.y >= 0 ? 1 : -1);
 
