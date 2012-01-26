@@ -18,10 +18,6 @@ void Paddle::init() {
 	sprite.SetTextureRect(sf::IntRect(0, 0, 64, 16));
 }
 
-Paddle::~Paddle() {
-	// TODO Auto-generated destructor stub
-}
-
 void Paddle::update(gamestate &gs) {
 	int x = gs.mousex;
 	int y = 600 - sprite.GetGlobalBounds().Height;

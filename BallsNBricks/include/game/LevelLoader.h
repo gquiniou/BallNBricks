@@ -20,11 +20,17 @@
 namespace game {
 
 class LevelLoader {
+
 public:
+
 	LevelLoader(std::string path, sf::Texture *brickstexture);
+
 	std::list<std::unique_ptr<Brick>> loadLevel();
+
 	virtual ~LevelLoader();
+
 private:
+
 	std::ifstream levelfile;
 	std::string filepath;
 	sf::Texture *texture;

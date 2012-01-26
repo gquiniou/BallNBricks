@@ -22,9 +22,6 @@ std::ostream& operator<<(std::ostream &os, sf::Vector2<T> &v2) {
 }
 
 
-Ball::~Ball() {
-	// TODO Auto-generated destructor stub
-}
 
 void Ball::init() {
 	static int nballs = 0;

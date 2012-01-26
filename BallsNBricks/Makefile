@@ -4,7 +4,7 @@ LDFLAGS= -LD:\dev\libs\SFML-2.0\lib  -lsfml-system -lsfml-window -lsfml-graphics
 
 CXXFLAGS= -g -Wall -Wextra -std=c++0x
 
-OBJS=src\BallsNBricks.o src\game\Game.o src\game\Ball.o src\game\Brick.o src\game\LevelLoader.o src\game\Paddle.o src\game\GameObject.o
+OBJS=src\BallsNBricks.o src\game\Game.o src\game\Ball.o src\game\LevelLoader.o src\game\Paddle.o src\game\GameObject.o src\game\Critter.o
 NAME=BallsNBricks.exe
 
 all:$(NAME)

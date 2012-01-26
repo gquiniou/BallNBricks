@@ -13,17 +13,19 @@
 namespace game {
 
 class Ball: public game::MovingObject {
+
 public:
 
 	Ball() : MovingObject(sf::Vector2f(-200, -200)), fired(false), lost(false) {
-		velocity = sf::Vector2f(-200.0, -200.0);
 		init();
 	}
-	virtual ~Ball();
+
+	virtual ~Ball() {};
 
 	void update(gamestate &);
 
 private:
+
 	void init();
 	void update(sf::Uint32 time, sf::Vector2f &, sf::Vector2f, gamestate &);
 

@@ -8,17 +8,19 @@
 #ifndef BRICK_H_
 #define BRICK_H_
 
-#include "game/GameObject.h"
+#include "game/Collidable.h"
 
 namespace game {
 
-class Brick: public GameObject  {
+class Brick: public Collidable  {
+
 public:
-//	Brick(gameinfo i) {}
-	Brick(sf::Sprite _sprite) : GameObject(_sprite) {
-	};
-	void update(gamestate &) { };
-	virtual ~Brick();
+
+	Brick(sf::Sprite _sprite) : Collidable(_sprite) {}
+
+	void update(gamestate &) {}
+
+	virtual ~Brick() {}
 };
 
 } /* namespace game */

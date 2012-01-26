@@ -14,9 +14,11 @@
 namespace game {
 
 class GameObject {
+
 public:
+
 	GameObject() {}
-	//GameObject(gameinfo i) : infos(i) {};
+
 	GameObject(sf::Sprite _sprite) : sprite(_sprite) {};
 
 	virtual ~GameObject();
@@ -26,12 +28,13 @@ public:
 	sf::Sprite &getDrawable() {
 		return sprite;
 	}
+
 	sf::FloatRect getRect() const {
 		return sprite.GetGlobalBounds();
 	}
 
 protected:
-	//gameinfo infos;
+
 	sf::Sprite sprite;
 	sf::Texture texture;
 };

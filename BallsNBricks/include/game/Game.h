@@ -8,9 +8,9 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "paddle.h"
-#include "ball.h"
-#include "brick.h"
+#include "Paddle.h"
+#include "Ball.h"
+#include "Brick.h"
 #include "LevelLoader.h"
 #include "gamestate.h"
 #include <SFML/Graphics.hpp>
@@ -21,13 +21,17 @@
 namespace game {
 
 class Game {
+
 public:
-	Game(sf::RenderWindow &_app) : App(_app)
-	{ }
+
+	Game(sf::RenderWindow &_app) : App(_app) {}
+
 	//sf::Vector2f GetClosestCollision(const GameObject *,const line, bool &);
+
 	void start();
 
 private:
+
 	void mainloop();
 	void init();
 	void cleanup();

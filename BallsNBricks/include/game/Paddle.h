@@ -13,12 +13,14 @@
 namespace game {
 
 class Paddle: public GameObject {
+
 public:
+
 	Paddle() {
 		init();
 	};
 
-	virtual ~Paddle();
+	virtual ~Paddle() {}
 
 	void update(gamestate &);
 
