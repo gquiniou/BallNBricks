@@ -11,7 +11,6 @@
 #include "game/Brick.h"
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <iostream>
 #include <fstream>
 #include <memory>
 #include <list>

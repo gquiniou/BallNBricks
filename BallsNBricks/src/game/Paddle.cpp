@@ -6,15 +6,14 @@
  */
 
 #include "game/Paddle.h"
+#include "game/ResourceManager.h"
 #include <iostream>
 
 namespace game {
 
 void Paddle::init() {
 	std::cout << "init";
-	if (! texture.LoadFromFile("paddles.png"))
-		std::cout << "menfin";
-	sprite.SetTexture(texture);
+	sprite.SetTexture(*ResourceManager::getTexture("paddles.png"));
 	sprite.SetTextureRect(sf::IntRect(0, 0, 64, 16));
 }
 

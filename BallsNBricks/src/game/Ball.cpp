@@ -6,6 +6,7 @@
  */
 
 #include "game/Ball.h"
+#include "game/ResourceManager.h"
 #include <iostream>
 #include <cmath>
 #include <cassert>
@@ -26,9 +27,7 @@ std::ostream& operator<<(std::ostream &os, sf::Vector2<T> &v2) {
 void Ball::init() {
 	static int nballs = 0;
 	std::cout << nballs++ <<std::endl;
-	if (! texture.LoadFromFile("balls.png"))
-		std::cout << "menfin";
-	sprite.SetTexture(texture);
+	sprite.SetTexture(*ResourceManager::getTexture("balls.png"));
 	sprite.SetTextureRect(sf::IntRect(0, 0, 16, 16));
 }
 

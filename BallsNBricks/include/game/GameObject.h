@@ -36,7 +36,6 @@ public:
 protected:
 
 	sf::Sprite sprite;
-	sf::Texture texture;
 };
 
 } /* namespace game */

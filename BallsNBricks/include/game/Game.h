@@ -40,7 +40,6 @@ private:
 	std::unique_ptr<Paddle> pad;
 	std::list<std::unique_ptr<Ball>> balls;
 	std::list<std::unique_ptr<Brick>> bricks;
-	sf::Texture brickstexture;
 	gamestate state;
 };
 
