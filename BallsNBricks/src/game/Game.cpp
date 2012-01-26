@@ -52,10 +52,8 @@ void Game::init() {
 	state.walls[4].y1 = state.walls[4].y2 = 0;
 	state.walls[4].x2 = App.GetWidth();
 
-	//brickstexture.LoadFromFile("briques.png");
 	LevelLoader ll("level1.txt", ResourceManager::getTexture("briques.png"));
 	bricks = ll.loadLevel();
-
 
 }
 

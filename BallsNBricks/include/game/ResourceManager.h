@@ -35,7 +35,7 @@ public:
 				textures.insert(std::pair<std::string, std::unique_ptr<sf::Texture>>(filename, std::move(temp)));
 				return tex;
 			} else {
-				std::cerr << "could not load texture";
+				std::cout << "could not load texture" << std::endl;
 			}
 		} else {
 			std::cout << "ResourceManager: found " << filename << std::endl;

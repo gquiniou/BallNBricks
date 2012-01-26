@@ -16,7 +16,7 @@ class Brick: public Collidable  {
 
 public:
 
-	Brick(sf::Sprite _sprite) : Collidable(_sprite) {}
+	Brick(sf::Sprite _sprite) : GameObject(_sprite) {}
 
 	void update(gamestate &) {}
 
