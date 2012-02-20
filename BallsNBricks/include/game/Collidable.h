@@ -9,6 +9,7 @@
 #define COLLIDABLE_H_
 
 #include "game/GameObject.h"
+#include <algorithm>
 
 namespace game {
 
@@ -20,8 +21,8 @@ public:
 	Collidable(sf::Sprite _sprite) : GameObject(_sprite) {}
 
 	int getCollisionRadius() {
-		//sf::FloatRect fr = sprite.GetGlobalBounds();
-		return 0;
+		sf::FloatRect r = sprite.GetGlobalBounds();
+		return std::max(r.Width, r.Height) / 2;
 	}
 
 	bool mustCheckCollisions() const {

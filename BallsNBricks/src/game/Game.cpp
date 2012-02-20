@@ -8,7 +8,7 @@
 #include "game/Game.h"
 #include "game/Critter.h"
 #include "game/ResourceManager.h"
-#include "game/LevelLoader.h"
+#include "game/GameObjectsManager.h"
 #include <iostream>
 #include <typeinfo>
 
@@ -27,11 +27,14 @@ void Game::init() {
 	App.ShowMouseCursor(false);
 	App.EnableVerticalSync(true);
 
-	pad.reset(new Paddle());
+	GameObjectsManager *gom  = GameObjectsManager::getInstance();
+	gom->initLevel();
+
+	//pad.reset(new Paddle());
 
 	//Let's start with one ball
-	std::unique_ptr<Ball> ball1(new Ball());
-	balls.push_back(std::move(ball1));
+//	std::unique_ptr<Ball> ball1(new Ball());
+//	balls.push_back(std::move(ball1));
 
 	state.ballfired = false;
 
@@ -52,8 +55,8 @@ void Game::init() {
 	state.walls[4].y1 = state.walls[4].y2 = 0;
 	state.walls[4].x2 = App.GetWidth();
 
-	LevelLoader ll("level1.txt", ResourceManager::getTexture("briques.png"));
-	bricks = ll.loadLevel();
+	//LevelLoader ll("level1.txt", ResourceManager::getTexture("briques.png"));
+	//bricks = ll.loadLevel();
 
 }
 
@@ -63,10 +66,8 @@ void Game::cleanup() {
 
 void Game::mainloop() {
 
-	Critter c(bricks.front().get()->getDrawable() );
-	c.getDrawable().SetPosition(100,500);
-
-	Paddle *paddle = pad.get();
+	//Paddle *paddle = pad.get();
+	GameObjectsManager *gom  = GameObjectsManager::getInstance();
 
 	while (App.IsOpened()) {
 
@@ -80,35 +81,38 @@ void Game::mainloop() {
 			}
 			if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Button::Right) {
 				std::unique_ptr<Ball> tmp(new Ball());
-				balls.push_back(std::move(tmp));
+				//balls.push_back(std::move(tmp));
 			}
 		}
 
 		state.frametime = App.GetFrameTime();
 		state.mousex = sf::Mouse::GetPosition(App).x;
 
-		paddle->update(state);
+		//paddle->update(state);
+		gom->update(state);
 
-		state.paddleRect = paddle->getDrawable().GetGlobalBounds();
+//TODO: VIRER CE MERDIER
+		state.paddleRect = gom->getPaddle()->getRect();
 		//The paddle is a moving wall
 		state.walls[0].x1 = state.paddleRect.Left;
 		state.walls[0].y1 = state.walls[0].y2 = state.paddleRect.Top;
 		state.walls[0].x2 = state.paddleRect.Left + state.paddleRect.Width;
 
-		for(auto it = balls.begin(); it != balls.end(); it++ )
-			(**it).update(state);
+		//for(auto it = balls.begin(); it != balls.end(); it++ )
+		//	(**it).update(state);
 		//	std::cout << typeid(**it).name() << std::endl;
 
 
 
 		App.Clear();
 
-		App.Draw(paddle->getDrawable());
-		for (auto it = begin(balls); it != end(balls); it++)
-			App.Draw((**it).getDrawable());
-		for (auto it = begin(bricks); it != end(bricks); it++)
-			App.Draw((**it).getDrawable());
-		App.Draw(c.getDrawable());
+		gom->draw(App);
+		//App.Draw(paddle->getDrawable());
+		//for (auto it = begin(balls); it != end(balls); it++)
+		//	App.Draw((**it).getDrawable());
+		//for (auto it = begin(bricks); it != end(bricks); it++)
+		//	App.Draw((**it).getDrawable());
+		//App.Draw(c.getDrawable());
 		App.Display();
 	}
 }

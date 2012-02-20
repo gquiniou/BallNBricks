@@ -85,7 +85,7 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 		sf::Uint32 remaining = time / (vlength(movement) / closest);
 		newpos = collisionpoint;
 
-		assert(newpos.x >= 0 && newpos.y >= 0);
+	//	assert(newpos.x >= 0 && newpos.y >= 0);
 
 		newpos.x += 0.1 * (velocity.x >= 0 ? 1 : -1);
 		newpos.y += 0.1 * (velocity.y >= 0 ? 1 : -1);

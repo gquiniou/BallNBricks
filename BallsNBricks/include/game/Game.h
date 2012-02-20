@@ -36,9 +36,7 @@ private:
 	void cleanup();
 
 	sf::RenderWindow &App;
-	std::unique_ptr<Paddle> pad;
-	std::list<std::unique_ptr<Ball>> balls;
-	std::list<std::unique_ptr<Brick>> bricks;
+
 	gamestate state;
 };
 

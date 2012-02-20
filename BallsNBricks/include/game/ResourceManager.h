@@ -38,7 +38,6 @@ public:
 				std::cout << "could not load texture" << std::endl;
 			}
 		} else {
-			std::cout << "ResourceManager: found " << filename << std::endl;
 			return it->second.get();
 		}
 		return nullptr;

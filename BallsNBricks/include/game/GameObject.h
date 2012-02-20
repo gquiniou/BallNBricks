@@ -29,6 +29,11 @@ public:
 		return sprite;
 	}
 
+	sf::Vector2f getCenter() {
+		sf::FloatRect r = sprite.GetGlobalBounds();
+		return sf::Vector2f(r.Left + r.Height /2, r.Top + r.Height / 2);
+	}
+
 	sf::FloatRect getRect() const {
 		return sprite.GetGlobalBounds();
 	}
