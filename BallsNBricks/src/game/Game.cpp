@@ -28,7 +28,7 @@ void Game::init() {
 	App.EnableVerticalSync(true);
 
 	GameObjectsManager *gom  = GameObjectsManager::getInstance();
-	gom->initLevel();
+	gom->initLevel(App);
 
 	//pad.reset(new Paddle());
 
@@ -38,22 +38,22 @@ void Game::init() {
 
 	state.ballfired = false;
 
-	//Bottom wall
-	state.walls[1].x1 = 0;
-	state.walls[1].y1 = state.walls[1].y2 = App.GetHeight();
-	state.walls[1].x2 = App.GetWidth();
-	//Right wall
-	state.walls[2].x1 = state.walls[2].x2 = App.GetWidth();
-	state.walls[2].y1 = 0;
-	state.walls[2].y2 = App.GetHeight();
-	//left wall
-	state.walls[3].x1 = state.walls[3].x2 = 0;
-	state.walls[3].y1 = 0;
-	state.walls[3].y2 = App.GetHeight();
-	//top wall
-	state.walls[4].x1 = 0;
-	state.walls[4].y1 = state.walls[4].y2 = 0;
-	state.walls[4].x2 = App.GetWidth();
+//	//Bottom wall
+//	state.walls[1].x1 = 0;
+//	state.walls[1].y1 = state.walls[1].y2 = App.GetHeight();
+//	state.walls[1].x2 = App.GetWidth();
+//	//Right wall
+//	state.walls[2].x1 = state.walls[2].x2 = App.GetWidth();
+//	state.walls[2].y1 = 0;
+//	state.walls[2].y2 = App.GetHeight();
+//	//left wall
+//	state.walls[3].x1 = state.walls[3].x2 = 0;
+//	state.walls[3].y1 = 0;
+//	state.walls[3].y2 = App.GetHeight();
+//	//top wall
+//	state.walls[4].x1 = 0;
+//	state.walls[4].y1 = state.walls[4].y2 = 0;
+//	state.walls[4].x2 = App.GetWidth();
 
 	//LevelLoader ll("level1.txt", ResourceManager::getTexture("briques.png"));
 	//bricks = ll.loadLevel();
@@ -94,9 +94,9 @@ void Game::mainloop() {
 //TODO: VIRER CE MERDIER
 		state.paddleRect = gom->getPaddle()->getRect();
 		//The paddle is a moving wall
-		state.walls[0].x1 = state.paddleRect.Left;
-		state.walls[0].y1 = state.walls[0].y2 = state.paddleRect.Top;
-		state.walls[0].x2 = state.paddleRect.Left + state.paddleRect.Width;
+//		state.walls[0].x1 = state.paddleRect.Left;
+//		state.walls[0].y1 = state.walls[0].y2 = state.paddleRect.Top;
+//		state.walls[0].x2 = state.paddleRect.Left + state.paddleRect.Width;
 
 		//for(auto it = balls.begin(); it != balls.end(); it++ )
 		//	(**it).update(state);

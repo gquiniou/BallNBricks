@@ -33,7 +33,8 @@ public:
 
 	~GameObjectsManager() {}
 
-	void initLevel();
+	sf::Vector2f getClosestCollision(line track, bool &ishorizontal, float &distance);
+	void initLevel(sf::RenderWindow &);
 	void nextlevel();
 	void update(gamestate &);
 	void draw(sf::RenderWindow &App);
@@ -50,6 +51,7 @@ private:
 	std::list<std::unique_ptr<Ball>> balls;
 	std::list<std::unique_ptr<Brick>> bricks;
 	std::list<std::unique_ptr<Critter>> critters;
+	std::vector<std::unique_ptr<line> > walls;
 
 	std::string currentlevel;
 	bool paused;
