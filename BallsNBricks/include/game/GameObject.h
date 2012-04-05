@@ -17,9 +17,9 @@ class GameObject {
 
 public:
 
-	GameObject() {}
+	GameObject() : destroyrequest(false) {}
 
-	GameObject(sf::Sprite _sprite) : sprite(_sprite) {}
+	GameObject(sf::Sprite _sprite) : destroyrequest(false), sprite(_sprite) {}
 
 	virtual ~GameObject() {}
 
@@ -38,8 +38,12 @@ public:
 		return sprite.GetGlobalBounds();
 	}
 
-protected:
+	bool destroyRequest() {
+		return destroyrequest;
+	}
 
+protected:
+	bool destroyrequest;
 	sf::Sprite sprite;
 };
 

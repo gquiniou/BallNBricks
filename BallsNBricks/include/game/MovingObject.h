@@ -21,11 +21,14 @@ public:
 	MovingObject(sf::Vector2f vel) : velocity(vel) {}
 
 	virtual ~MovingObject() {}
+	//void update(gamestate &) =0;
 
 	sf::Vector2f getVelocity() const;
+	void setVeloCity(sf::Vector2f v) {
+		velocity = v;
+	}
 
 protected:
-
 	sf::Vector2f velocity;
 };
 

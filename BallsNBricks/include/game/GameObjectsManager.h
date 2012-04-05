@@ -12,6 +12,7 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "Critter.h"
+#include "MovingObject.h"
 #include <list>
 #include <memory>
 #include <iostream>
@@ -33,7 +34,8 @@ public:
 
 	~GameObjectsManager() {}
 
-	sf::Vector2f getClosestCollision(line track, bool &ishorizontal, float &distance);
+	sf::Vector2f getClosestCollision(line , bool &, float &);
+	sf::Vector2f getClosestCollision(MovingObject &, sf::Vector2f, float &);
 	void initLevel(sf::RenderWindow &);
 	void nextlevel();
 	void update(gamestate &);

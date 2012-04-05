@@ -24,8 +24,6 @@ std::ostream& operator<<(std::ostream &os, sf::Vector2<T> &v2) {
   return os;
 }
 
-
-
 void Ball::init() {
 	static int nballs = 0;
 	std::cout << nballs++ <<std::endl;
@@ -54,7 +52,6 @@ void Ball::update(gamestate &gs) {
 
 
 void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f origpos, gamestate &gs) {
-	//float closest = 100000;
 	float distance;
 	sf::Vector2f collisionpoint(0, 0);
 	bool ishoriz = false;
@@ -70,18 +67,6 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 	GameObjectsManager *gom  = GameObjectsManager::getInstance();
 	collisionpoint = gom->getClosestCollision(balltrack, ishoriz, distance);
 
-//	//Checking collisions against Walls and Paddle
-//	for (int i = 0; i < 5 ; i++) {
-//		sf::Vector2f point(intersection(balltrack, gs.walls[i]));
-//		if (point != empty) {
-//			float length = vlength( point - origpos);
-//			if (length < closest) {
-//				closest = length;
-//				collisionpoint = point;
-//				ishoriz = gs.walls[i].isHorizontal();
-//			}
-//		}
-//	}
 	if (collisionpoint != empty) {
 		if (ishoriz) {
 			velocity.y = - velocity.y;
@@ -90,8 +75,6 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 		}
 		sf::Uint32 remaining = time / (vlength(movement) / distance);
 		newpos = collisionpoint;
-
-	//	assert(newpos.x >= 0 && newpos.y >= 0);
 
 		newpos.x += 0.1 * (velocity.x >= 0 ? 1 : -1);
 		newpos.y += 0.1 * (velocity.y >= 0 ? 1 : -1);
@@ -103,26 +86,5 @@ void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f orig
 static inline float vlength(const sf::Vector2f v) {
 	return sqrt(v.x * v.x + v.y * v.y);
 }
-
-//inline float vlength(const sf::Vector2f v) {
-//	return sqrt(v.x * v.x + v.y * v.y);
-//}
-//
-//sf::Vector2i intersection(const line l1, const line l2) {
-//	sf::Vector2i result(0, 0);
-//
-//	int denom = ((l2.y2-l2.y1) * (l1.x2-l1.x1)) - ((l2.x2-l2.x1) * (l1.y2-l1.y1));
-//	if (denom != 0) {
-//		float ua = (((l2.x2-l2.x1) * (l1.y1-l2.y1)) - ((l2.y2-l2.y1) * (l1.x1-l2.x1))) / denom;
-//		if ((ua >= 0) && (ua <= 1)) {
-//			float ub = (((l1.x2-l1.x1) * (l1.y1-l2.y1)) - ((l1.y2-l1.y1) * (l1.x1-l2.x1))) / denom;
-//			if ((ub >= 0) && (ub <= 1)) {
-//				result.x = l1.x1 + (ua * (l1.x2-l1.x1));
-//				result.y = l1.y1 + (ua * (l1.y2-l1.y1));
-//			}
-//		}
-//	}
-//	return result;
-//}
 
 } /* namespace game */

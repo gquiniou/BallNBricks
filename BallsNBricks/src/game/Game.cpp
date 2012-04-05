@@ -117,9 +117,5 @@ void Game::mainloop() {
 	}
 }
 
-//sf::Vector2f Game::GetClosestCollision(const GameObject *source, const line track, bool &horizbounce) {
-//	//for (auto it = begin(bricks); it != end(bricks); it++)
-//}
-
 
 } /* namespace game */

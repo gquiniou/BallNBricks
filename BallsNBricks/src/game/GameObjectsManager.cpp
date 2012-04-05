@@ -12,6 +12,9 @@
 
 namespace game {
 
+ void rect2lines(line (& lines)[4], const sf::FloatRect r);
+
+
 sf::Vector2i intersection(line, line);
 float vlength(sf::Vector2f);
 
@@ -41,10 +44,18 @@ void GameObjectsManager::update(gamestate &state) {
 	pad.get()->update(state);
 	for(auto it = balls.begin(); it != balls.end(); it++ )
 		(**it).update(state);
-	for(auto it = bricks.begin(); it != bricks.end(); it++ )
+	for(auto it = bricks.begin(); it != bricks.end(); it++ ) {
 		(**it).update(state);
+		if ((**it).destroyRequest())
+			it = bricks.erase(it);
+	}
 	for(auto it = critters.begin(); it != critters.end(); it++ )
 		(**it).update(state);
+}
+
+sf::Vector2f GameObjectsManager::getClosestCollision(MovingObject & obj, sf::Vector2f movement, float& distance) {
+	std::cout << &obj << distance;
+	return movement;
 }
 
 sf::Vector2f GameObjectsManager::getClosestCollision(line track, bool & ishorizontal, float & distance) {
@@ -63,14 +74,31 @@ sf::Vector2f GameObjectsManager::getClosestCollision(line track, bool & ishorizo
 			}
 		}
 	}
-//	for(auto it = bricks.begin(); it != bricks.end(); it++) {
-//		line lines[4];
-//	}
-
+	Brick *brick = nullptr;
+	for(auto it = bricks.begin(); it != bricks.end(); it++) {
+		if (! (**it).isalive())
+			continue;
+		line lines[4];
+		rect2lines(lines, (**it).getRect());
+		for (auto lit = std::begin(lines); lit != std::end(lines); lit++) {
+			sf::Vector2f point(intersection( *lit , track));
+			if (point != empty) {
+				float length = vlength( point - sf::Vector2f(track.x1, track.y1));
+				if (length < distance) {
+					distance = length;
+					result = point;
+					ishorizontal = (*lit).ishorizontal();
+					brick = &(**it);
+				}
+			}
+		}
+	}
+	if (brick != nullptr)
+		brick->hit();
 	return result;
 }
 
-void rect2lines(line (& lines)[4], sf::FloatRect r) {
+void rect2lines(line (& lines)[4], const sf::FloatRect r) {
 	lines[0].x1 = r.Left;
 	lines[0].x2 = r.Left + r.Width;
 	lines[0].y1 = r.Top;

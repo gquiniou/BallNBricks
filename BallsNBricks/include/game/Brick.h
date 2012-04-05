@@ -16,9 +16,14 @@ class Brick: public Collidable  {
 
 public:
 
-	Brick(sf::Sprite _sprite) : GameObject(_sprite) {}
+	Brick(sf::Sprite _sprite) : GameObject(_sprite) {
+		lives = 1;
+	}
 
-	void update(gamestate &) {}
+	void update(gamestate &) {
+		if (lives == 0)
+			destroyrequest = true;
+	}
 
 	virtual ~Brick() {}
 };

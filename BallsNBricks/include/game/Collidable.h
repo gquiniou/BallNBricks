@@ -25,13 +25,17 @@ public:
 		return std::max(r.Width, r.Height) / 2;
 	}
 
-	bool mustCheckCollisions() const {
-		return checkcollisions;
+	void hit() {
+		lives--;
+		washit = true;
 	}
-
+	bool isalive() {
+		return lives > 0;
+	}
+protected:
+	int lives;
+	bool washit;
 private:
-
-	bool checkcollisions;
 };
 
 } /* namespace game */

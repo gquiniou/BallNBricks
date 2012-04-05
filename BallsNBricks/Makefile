@@ -2,9 +2,9 @@ CPPFLAGS= -ID:\dev\libs\SFML-2.0\include -I./include
 
 LDFLAGS= -LD:\dev\libs\SFML-2.0\lib  -lsfml-system -lsfml-window -lsfml-graphics
 
-CXXFLAGS= -g -Wall -Wextra -std=c++0x
+CXXFLAGS= -g -Wall -Wextra -std=c++0x -Weffc++
 
-OBJS=src\BallsNBricks.o src\game\Game.o src\game\Ball.o src\game\LevelLoader.o src\game\Paddle.o src\game\Critter.o
+OBJS=src\BallsNBricks.o src\game\Game.o src\game\Ball.o src\game\LevelLoader.o src\game\Paddle.o src\game\Critter.o src\game\GameObjectsManager.o
 NAME=BallsNBricks.exe
 
 all:$(NAME)
