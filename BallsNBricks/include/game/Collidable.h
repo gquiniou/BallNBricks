@@ -21,8 +21,8 @@ public:
 	Collidable(sf::Sprite _sprite) : GameObject(_sprite) {}
 
 	int getCollisionRadius() {
-		sf::FloatRect r = sprite.GetGlobalBounds();
-		return std::max(r.Width, r.Height) / 2;
+		sf::FloatRect r = sprite.getGlobalBounds();
+		return std::max(r.width, r.height) / 2;
 	}
 
 	void hit() {

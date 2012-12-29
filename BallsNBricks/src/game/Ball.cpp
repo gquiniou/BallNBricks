@@ -27,8 +27,8 @@ std::ostream& operator<<(std::ostream &os, sf::Vector2<T> &v2) {
 void Ball::init() {
 	static int nballs = 0;
 	std::cout << nballs++ <<std::endl;
-	sprite.SetTexture(*ResourceManager::getTexture("balls.png"));
-	sprite.SetTextureRect(sf::IntRect(0, 0, 16, 16));
+	sprite.setTexture(*ResourceManager::getTexture("balls.png"));
+	sprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
 }
 
 void Ball::update(gamestate &gs) {
@@ -41,12 +41,12 @@ void Ball::update(gamestate &gs) {
 
 	if (! fired  ) {
 		//La balle suit le pad
-		newpos.x = gs.paddleRect.Left + gs.paddleRect.Width/2;
-		newpos.y = gs.paddleRect.Top - sprite.GetGlobalBounds().Height;
+		newpos.x = gs.paddleRect.left + gs.paddleRect.width/2;
+		newpos.y = gs.paddleRect.top - sprite.getGlobalBounds().height;
 	} else {
-		update(gs.frametime , newpos, sprite.GetPosition(), gs);
+		update(gs.frametime , newpos, sprite.getPosition(), gs);
 	}
-	sprite.SetPosition(newpos.x, newpos.y);
+	sprite.setPosition(newpos.x, newpos.y);
 
 }
 

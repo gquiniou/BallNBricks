@@ -37,18 +37,18 @@ std::list<std::unique_ptr<Brick>> LevelLoader::loadLevel() {
 				sf::Sprite sprite(*texture);
 				switch (*c) {
 				case '1':
-					sprite.SetTextureRect(sf::IntRect(48, 0, 48, 16));
+					sprite.setTextureRect(sf::IntRect(48, 0, 48, 16));
 					break;
 				case '2':
-					sprite.SetTextureRect(sf::IntRect(96, 0, 32, 16));
+					sprite.setTextureRect(sf::IntRect(96, 0, 32, 16));
 					break;
 				case '3':
-					sprite.SetTextureRect(sf::IntRect(128, 0, 16, 16));
+					sprite.setTextureRect(sf::IntRect(128, 0, 16, 16));
 					break;
 				default:
 				continue;
 				}
-				sprite.SetPosition(x, y);
+				sprite.setPosition(x, y);
 				std::unique_ptr<Brick> temp(new Brick(sprite));
 				bricks.push_back(std::move(temp));
 			}

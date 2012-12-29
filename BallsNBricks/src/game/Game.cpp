@@ -24,8 +24,8 @@ void Game::start() {
 }
 
 void Game::init() {
-	App.ShowMouseCursor(false);
-	App.EnableVerticalSync(true);
+	App.setMouseCursorVisible(false);
+	App.setVerticalSyncEnabled(true);
 
 	GameObjectsManager *gom  = GameObjectsManager::getInstance();
 	gom->initLevel(App);
@@ -68,25 +68,26 @@ void Game::mainloop() {
 
 	//Paddle *paddle = pad.get();
 	GameObjectsManager *gom  = GameObjectsManager::getInstance();
+	sf::Clock frametime;
 
-	while (App.IsOpened()) {
+	while (App.isOpen()) {
 
 		sf::Event Event;
-		while (App.PollEvent(Event)) {
-			if ((Event.Type == sf::Event::Closed) || ((Event.Type == sf::Event::KeyPressed) && (Event.Key.Code == sf::Keyboard::Escape))) {
+		while (App.pollEvent(Event)) {
+			if ((Event.type == sf::Event::Closed) || ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))) {
 				return;
 			}
-			if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Button::Left) {
+			if (Event.type == sf::Event::MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Button::Left) {
 				state.ballfired = true;
 			}
-			if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Button::Right) {
+			if (Event.type == sf::Event::MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Button::Right) {
 				std::unique_ptr<Ball> tmp(new Ball());
 				//balls.push_back(std::move(tmp));
 			}
 		}
 
-		state.frametime = App.GetFrameTime();
-		state.mousex = sf::Mouse::GetPosition(App).x;
+		state.frametime = frametime.restart().asMilliseconds();
+		state.mousex = sf::Mouse::getPosition(App).x;
 
 		//paddle->update(state);
 		gom->update(state);
@@ -104,7 +105,7 @@ void Game::mainloop() {
 
 
 
-		App.Clear();
+		App.clear();
 
 		gom->draw(App);
 		//App.Draw(paddle->getDrawable());
@@ -113,7 +114,7 @@ void Game::mainloop() {
 		//for (auto it = begin(bricks); it != end(bricks); it++)
 		//	App.Draw((**it).getDrawable());
 		//App.Draw(c.getDrawable());
-		App.Display();
+		App.display();
 	}
 }
 

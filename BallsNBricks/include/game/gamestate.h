@@ -27,7 +27,7 @@ typedef struct sgamestate {
 	int mousex;
 	bool ballfired;
 	sf::FloatRect paddleRect;
-	sf::Uint32 frametime;
+	sf::Int32 frametime;
 	//line walls[5];
 } gamestate;
 

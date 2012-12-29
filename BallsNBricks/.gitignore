@@ -10,3 +10,5 @@
 /toto.out
 /.settings
 /BallsNBricks.exe
+*~
+*.o

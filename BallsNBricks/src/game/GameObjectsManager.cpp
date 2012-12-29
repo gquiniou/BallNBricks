@@ -30,11 +30,11 @@ void GameObjectsManager::initLevel(sf::RenderWindow &app) {
 	LevelLoader ll("level1.txt", ResourceManager::getTexture("briques.png"));
 	bricks = ll.loadLevel();
 
-	walls.push_back(std::unique_ptr<line>(new line(0, 0, app.GetWidth(), 0)));
-	walls.push_back(std::unique_ptr<line>(new line(app.GetWidth() , 0, app.GetWidth(), app.GetHeight())));
-	walls.push_back(std::unique_ptr<line>(new line(0 , app.GetHeight(), 0, 0)));
+	walls.push_back(std::unique_ptr<line>(new line(0, 0, app.getSize().x, 0)));
+	walls.push_back(std::unique_ptr<line>(new line(app.getSize().x , 0, app.getSize().x, app.getSize().y)));
+	walls.push_back(std::unique_ptr<line>(new line(0 , app.getSize().y, 0, 0)));
 	//Bottom wall
-	walls.push_back(std::unique_ptr<line>(new line(app.GetWidth() , app.GetHeight(), 0, app.GetHeight())));
+	walls.push_back(std::unique_ptr<line>(new line(app.getSize().x , app.getSize().x, 0, app.getSize().y)));
 
 	//	walls[0] = ;
 //	walls[1] = new line(app.GetWidth(), 0, app.GetWidth(), app.GetHeight());
@@ -99,22 +99,22 @@ sf::Vector2f GameObjectsManager::getClosestCollision(line track, bool & ishorizo
 }
 
 void rect2lines(line (& lines)[4], const sf::FloatRect r) {
-	lines[0].x1 = r.Left;
-	lines[0].x2 = r.Left + r.Width;
-	lines[0].y1 = r.Top;
-	lines[0].y2 = r.Top;
-	lines[1].x1 = r.Left + r.Width;
-	lines[1].x2 = r.Left + r.Width;
-	lines[1].y1 = r.Top;
-	lines[1].y2 = r.Top + r.Height;
-	lines[2].x1 = r.Left + r.Width;
-	lines[2].x2 = r.Left;
-	lines[2].y1 = r.Top + r.Height;
-	lines[2].y2 = r.Top + r.Height;
-	lines[2].x1 = r.Left;
-	lines[2].x2 = r.Left;
-	lines[2].y1 = r.Top + r.Height;
-	lines[2].y2 = r.Top;
+	lines[0].x1 = r.left;
+	lines[0].x2 = r.left + r.width;
+	lines[0].y1 = r.top;
+	lines[0].y2 = r.top;
+	lines[1].x1 = r.left + r.width;
+	lines[1].x2 = r.left + r.width;
+	lines[1].y1 = r.top;
+	lines[1].y2 = r.top + r.height;
+	lines[2].x1 = r.left + r.width;
+	lines[2].x2 = r.left;
+	lines[2].y1 = r.top + r.height;
+	lines[2].y2 = r.top + r.height;
+	lines[2].x1 = r.left;
+	lines[2].x2 = r.left;
+	lines[2].y1 = r.top + r.height;
+	lines[2].y2 = r.top;
 }
 
 inline float vlength(const sf::Vector2f v) {
@@ -141,12 +141,12 @@ sf::Vector2i intersection(const line l1, const line l2) {
 
 void GameObjectsManager::draw(sf::RenderWindow &App) {
 	for(auto it = bricks.begin(); it != bricks.end(); it++ )
-		App.Draw((**it).getDrawable());
+		App.draw((**it).getDrawable());
 	for(auto it = critters.begin(); it != critters.end(); it++ )
-		App.Draw((**it).getDrawable());
+		App.draw((**it).getDrawable());
 	for(auto it = balls.begin(); it != balls.end(); it++ )
-		App.Draw((**it).getDrawable());
-	App.Draw(pad.get()->getDrawable());
+		App.draw((**it).getDrawable());
+	App.draw(pad.get()->getDrawable());
 }
 } /* namespace game */
 
