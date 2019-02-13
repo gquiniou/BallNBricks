@@ -27,7 +27,7 @@ public:
 		return sprite;
 	}
 	sf::FloatRect getRect() const {
-		return sprite.GetGlobalBounds();
+		return sprite.getGlobalBounds();
 	}
 
 protected:

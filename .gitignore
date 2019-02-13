@@ -8,3 +8,6 @@
 /openal32.dll
 /sfml-window-2.dll
 /sfml-graphics-2.dll
+CMakeCache.txt
+build
+CMakeFiles

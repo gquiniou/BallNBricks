@@ -20,7 +20,7 @@ int main() {
 	game::Game g(App);
 	g.start();
 
-	App.Close();
+	App.close();
 
 	return 0;
 }

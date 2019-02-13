@@ -9,6 +9,7 @@
 #define GAMESTATE_H_
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 
 typedef struct  {
@@ -24,7 +25,7 @@ typedef struct sgamestate {
 	int mousex;
 	bool ballfired;
 	sf::FloatRect paddleRect;
-	sf::Uint32 frametime;
+	sf::Time frametime;
 	line walls[5];
 } gamestate;
 

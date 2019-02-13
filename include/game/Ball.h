@@ -25,7 +25,7 @@ public:
 
 private:
 	void init();
-	void update(sf::Uint32 time, sf::Vector2f &, sf::Vector2f, gamestate &);
+	void update(sf::Int32 time, sf::Vector2f &, sf::Vector2f, gamestate &);
 
 	bool fired;
 	bool lost;

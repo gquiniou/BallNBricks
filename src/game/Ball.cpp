@@ -30,8 +30,8 @@ Ball::~Ball() {
 void Ball::init() {
 	static int nballs = 0;
 	std::cout << nballs++ <<std::endl;
-	sprite.SetTexture(*ResourceManager::getTexture("balls.png"));
-	sprite.SetTextureRect(sf::IntRect(0, 0, 16, 16));
+	sprite.setTexture(*ResourceManager::getTexture("balls.png"));
+	sprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
 }
 
 void Ball::update(gamestate &gs) {
@@ -44,23 +44,23 @@ void Ball::update(gamestate &gs) {
 
 	if (! fired  ) {
 		//La balle suit le pad
-		newpos.x = gs.paddleRect.Left + gs.paddleRect.Width/2;
-		newpos.y = gs.paddleRect.Top - sprite.GetGlobalBounds().Height;
+		newpos.x = gs.paddleRect.left + gs.paddleRect.width/2;
+		newpos.y = gs.paddleRect.top - sprite.getGlobalBounds().height;
 	} else {
-		update(gs.frametime , newpos, sprite.GetPosition(), gs);
+		update(gs.frametime.asMilliseconds() , newpos, sprite.getPosition(), gs);
 	}
-	sprite.SetPosition(newpos.x, newpos.y);
+	sprite.setPosition(newpos.x, newpos.y);
 
 }
 
 
-void Ball::update(const sf::Uint32 time, sf::Vector2f &newpos, sf::Vector2f origpos, gamestate &gs) {
+void Ball::update(const sf::Int32 time, sf::Vector2f &newpos, sf::Vector2f origpos, gamestate &gs) {
 	float closest = 100000;
 	sf::Vector2f collisionpoint(0, 0);
 	bool ishoriz = false;
 
 	sf::Vector2f empty(0,0);
-	sf::Vector2f movement(velocity.x * time / 1000, velocity.y * time / 1000);
+	sf::Vector2f movement(velocity.x * time  / 1000, velocity.y * time / 1000);
 
 	newpos.x = origpos.x + movement.x;
 	newpos.y = origpos.y + movement.y;
