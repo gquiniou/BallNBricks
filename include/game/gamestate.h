@@ -9,7 +9,7 @@
 #define GAMESTATE_H_
 
 #include <SFML/Graphics.hpp>
-
+#include <cmath>
 
 
 struct line  {
